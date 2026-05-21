@@ -1,68 +1,97 @@
-#Daily Challenge 1
-#Instructions
-# User Input:
-
-#Ask the user to enter a word.
-#Store the input word in a variable.
-#2. Creating the Dictionary:
+# ============================================================
+# Daily Challenge 1: Letter Index Dictionary
+# Instructions:
+# Create a dictionary that stores the indices (position number)
+# of each letter of a word provided by the user.
 #
-#Iterate through each character of the input word using a loop.
-#And check if the character is already a key in the dictionary.
+# Step 1 - User Input:
+#   Ask the user to enter a word.
+#   Store the entered word in a variable.
+#
+# Step 2 - Create the dictionary:
+#   Loop through each character of the word.
+#   Check if the character is already a key in the dictionary.
+#     - If it is, append the current index to the list of that key.
+#     - If it is not, create a new key-value pair in the dictionary.
+#   Make sure characters (keys) are strings.
+#   Make sure indices (values) are stored in lists.
+#
+# Step 3 - Expected output:
+#   Input "dodo"   → {"d": [0, 2], "o": [1, 3]}
+#   Input "froggy" → {"f": [0], "r": [1], "o": [2], "g": [3, 4], "y": [5]}
+# ============================================================
 
-  #  * If it is, append the current index to the list associated with that key.
-   # * If it is not, create a new key-value pair in the dictionary.
-#Ensure that the characters (keys) are strings.
-#Ensure that the indices (values) are stored in lists.
-#3. Expected Output:
-
-#For the input “dodo”, the output should be: {"d": [0, 2], "o": [1, 3]}.
-#For the input “froggy”, the output should be: {"f": [0], "r": [1], "o": [2], "g": [3, 4], "y": [5]}.
-#For the input “grapes”, the output should be: {"g": [0], "r": [1], "a": [2], "p": [3], "e": [4], "s": [5]}. 
-
-
-
+# Ask the user to enter a word
 mot = input("Entrez un mot : ")
 
-dictionnaire = {}
+# Create an empty dictionary to store letter indices
+indice_lettres = {}
 
+# Loop through each character and its index in the word
 for index, caractere in enumerate(mot):
-    if caractere in dictionnaire:
-        dictionnaire[caractere].append(index)
+    # If the character is already a key, append the index to its list
+    if caractere in indice_lettres:
+        indice_lettres[caractere].append(index)
+    # If not, create a new key with a list containing the current index
     else:
-        dictionnaire[caractere] = [index]
-print(dictionnaire)
+        indice_lettres[caractere] = [index]
 
-#Challenge 2
-#Instructions
-#1. Store Data:
-
-#You will be provided with a dictionary (items_purchase) where the keys are the item names and the values are their prices (as strings with a dollar sign). The priority is defined by the position of the iten on the dictionary: from the most important to the less important.
-#You will also be given a string (wallet) representing the amount of money you have.
-#2. Data Cleaning:
-
-#You need to clean the dollar sign and the commas using python. Don’t hard code it.
-#3. Determining Affordable Items:
-
-#create a list called basket and add there the items that you can buy with the money you have on the wallet
-#Don’t forget to update the wallet after buying an item.
-#If the basket is empty (no items can be afforded), return the string “Nothing”.
-#Otherwise, print the basket list in alphabetical order.
-#4. Examples:
-
-#Given:
-#items_purchase = {"Water": "$1", "Bread": "$3", "TV": "$1,000", "Fertilizer": "$20"}
-#wallet = "$300"
+print(indice_lettres)
 
 
-#The output should be: ["Bread", "Fertilizer", "Water"].
+# ============================================================
+# Daily Challenge 2: Affordable Items
+# Instructions:
+# Create a program that prints a list of items that can be
+# purchased with a given amount of money.
+#
+# Step 1 - Store the data:
+#   You are given a dictionary (items_purchase) where keys are
+#   item names and values are their prices as strings with "$".
+#   Priority is defined by position in the dictionary (most to least).
+#   You are also given a string (wallet) representing your budget.
+#
+# Step 2 - Clean the data:
+#   Remove the dollar sign and commas using Python (not hardcoded).
+#
+# Step 3 - Determine affordable items:
+#   Create a list called basket and add items you can afford.
+#   Update your wallet after each purchase.
+#   If basket is empty, return the string "Nothing".
+#   Otherwise, print the basket list in alphabetical order.
+#
+# Examples:
+#   items_purchase = {"Water": "$1", "Bread": "$3", "TV": "$1,000", "Fertilizer": "$20"}
+#   wallet = "$300"
+#   Result → ["Bread", "Fertilizer", "Water"]
+#
+#   items_purchase = {"Phone": "$999", "Speakers": "$300", "Laptop": "$5,000", "PC": "$1200"}
+#   wallet = "$1"
+#   Result → "Nothing"
+# ============================================================
 
-#Given:
-#items_purchase = {"Apple": "$4", "Honey": "$3", "Fan": "$14", "Bananas": "$4", "Pan": "$100", "Spoon": "$2"}
-#wallet = "$100"
+items_purchase = {"Water": "$1", "Bread": "$3", "TV": "$1,000", "Fertilizer": "$20"}
+wallet = "$300"
 
+# Clean the wallet: remove "$" and "," then convert to int
+budget = int(wallet.replace("$", "").replace(",", ""))
 
-#The output should be: ["Apple", "Bananas", "Fan", "Honey", "Spoon"].
+# Create an empty basket list
+panier = []
 
-#Given:
-#items_purchase = {"Phone": "$999", "Speakers": "$300", "Laptop": "$5,000", "PC": "$1200"}
-#wallet = "$1"
+# Loop through each item and its price
+for article, prix in items_purchase.items():
+    # Clean the price: remove "$" and "," then convert to int
+    prix_nettoye = int(prix.replace("$", "").replace(",", ""))
+
+    # If the item is affordable, add it to the basket and update the budget
+    if prix_nettoye <= budget:
+        panier.append(article)
+        budget -= prix_nettoye
+
+# If basket is empty, print "Nothing"
+if not panier:
+    print("Nothing")
+# Otherwise, print the basket in alphabetical order
+else:
+    print(sorted(panier))
