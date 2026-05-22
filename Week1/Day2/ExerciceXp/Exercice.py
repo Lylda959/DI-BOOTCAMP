@@ -20,11 +20,6 @@ print(dictionary)
 family = {"rick": 43, 'beth': 13, 'morty': 5, 'summer': 8}
 
 def calculate_ticket_cost(family):
-    """
-    Calculate the total cost of movie tickets for a family.
-    Parameters: family (dict): dictionary of name -> age
-    Returns: int: total cost
-    """
     total_cost = 0
     print("=== Cinema Ticket Prices ===\n")
     for name, age in family.items():
@@ -61,24 +56,20 @@ brand = {
     }
 }
 
-def manipulate_brand(brand):
-    """
-    Manipulate and display information from the brand dictionary.
-    Parameters: brand (dict): dictionary containing brand information
-    """
-    brand["number_stores"] = 2
-    print(f"Zara's clients: {', '.join(brand['type_of_clothes'])}")
-    brand["country_creation"] = "Spain"
-    if "international_competitors" in brand:
-        brand["international_competitors"].append("Desigual")
-    del brand["creation_date"]
-    print(f"Last competitor: {brand['international_competitors'][-1]}")
-    print(f"Major colors in the US: {brand['major_color']['US']}")
-    print(f"Number of keys: {len(brand)}")
-    print(f"Keys: {list(brand.keys())}")
-    more_on_zara = {"creation_date": 1975, "number_stores": 7000}
-    brand.update(more_on_zara)
-    print(f"\nMerged dictionary: {brand}")
+brand["number_stores"] = 2
+print(f"Zara's clients: {', '.join(brand['type_of_clothes'])}")
+brand["country_creation"] = "Spain"
+if "international_competitors" in brand:
+    brand["international_competitors"].append("Desigual")
+del brand["creation_date"]
+print(f"Last competitor: {brand['international_competitors'][-1]}")
+print(f"Major colors in the US: {brand['major_color']['US']}")
+print(f"Number of keys: {len(brand)}")
+print(f"Keys: {list(brand.keys())}")
+
+more_on_zara = {"creation_date": 1975, "number_stores": 7000}
+brand.update(more_on_zara)
+print(f"\nMerged dictionary: {brand}")
 
 
 # ============================================================
