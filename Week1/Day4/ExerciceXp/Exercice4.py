@@ -1,81 +1,42 @@
+class Person:
+    def __init__(self, first_name, age):
+        self.first_name = first_name
+        self.age = age
+        self.last_name = ""
 
-# ============================================================
-# Exercise 4: Zoo
-# Instructions:
-# Create a Zoo class to manage animals.
-# The class must allow adding, displaying, selling,
-# and sorting animals alphabetically.
-#
-# Step 1: Create a Zoo class with:
-#   - __init__(zoo_name): initializes name and empty animals list
-#   - add_animal(new_animal): adds animal if not already in list
-#   - get_animals(): prints all animals in the zoo
-#   - sell_animal(animal_sold): removes animal if it exists
-#   - sort_animals(): sorts and groups animals by first letter
-#   - get_groups(): prints the grouped animals
-# Step 2: Create a Zoo instance.
-# Step 3: Call the Zoo methods to test adding, selling,
-#         displaying, sorting and grouping animals.
-# Bonus: Use *args to add multiple animals at once.
-# ============================================================
-
-class Zoo:
-    def __init__(self, zoo_name):
-        """
-        Initialize a Zoo object.
-        Parameters: zoo_name (str): name of the zoo
-        """
-        self.zoo_name = zoo_name
-        self.animals = []
-
-    def add_animal(self, *new_animals):
-        """
-        Add one or more animals to the zoo if not already present.
-        Parameters: *new_animals (str): one or more animal names
-        """
-        for animal in new_animals:
-            if animal not in self.animals:
-                self.animals.append(animal)
-
-    def get_animals(self):
-        """Print all animals currently in the zoo."""
-        print(f"Animals in {self.zoo_name}: {self.animals}")
-
-    def sell_animal(self, animal_sold):
-        """
-        Remove an animal from the zoo if it exists.
-        Parameters: animal_sold (str): name of the animal to remove
-        """
-        if animal_sold in self.animals:
-            self.animals.remove(animal_sold)
-
-    def sort_animals(self):
-        """
-        Sort animals alphabetically and group them by first letter.
-        Returns: dict: dictionary with letters as keys and animal lists as values
-        """
-        sorted_list = sorted(self.animals)
-        groups = {}
-        for animal in sorted_list:
-            first_letter = animal[0].upper()
-            if first_letter not in groups:
-                groups[first_letter] = []
-            groups[first_letter].append(animal)
-        return groups
-
-    def get_groups(self):
-        """Print animals grouped by their first letter."""
-        groups = self.sort_animals()
-        for letter, animals in groups.items():
-            print(f"{letter}: {animals}")
+    def is_18(self):
+        return self.age >= 18
 
 
-# Step 2: Create a Zoo instance
-brooklyn_safari = Zoo("Brooklyn Safari")
+class Family:
+    def __init__(self, last_name):
+        self.last_name = last_name
+        self.members = []
 
-# Step 3: Use the Zoo methods
-brooklyn_safari.add_animal("Giraffe", "Bear", "Baboon", "Cat", "Cougar", "Lion", "Zebra")
-brooklyn_safari.get_animals()
-brooklyn_safari.sell_animal("Bear")
-brooklyn_safari.get_animals()
-brooklyn_safari.get_groups()
+    def born(self, first_name, age):
+        new_person = Person(first_name, age)
+        new_person.last_name = self.last_name
+        self.members.append(new_person)
+
+    def check_majority(self, first_name):
+        for member in self.members:
+            if member.first_name == first_name:
+                if member.is_18():
+                    print("You are over 18, your parents Jane and John accept that you will go out with your friends")
+                else:
+                    print("Sorry, you are not allowed to go out with your friends.")
+
+    def family_presentation(self):
+        print(f"Family name: {self.last_name}")
+        for member in self.members:
+            print(f"  - {member.first_name}, {member.age} years old")
+
+
+my_family = Family("Smith")
+my_family.born("Jane", 25)
+my_family.born("John", 17)
+my_family.born("Emma", 14)
+
+my_family.check_majority("Jane")
+my_family.check_majority("John")
+my_family.family_presentation()

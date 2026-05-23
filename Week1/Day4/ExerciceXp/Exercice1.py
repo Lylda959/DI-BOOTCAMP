@@ -1,39 +1,37 @@
-# ============================================================
-# Exercise 1: Cats
-# Instructions:
-# Use the Cat class to create three cat objects.
-# Create a function to find the oldest cat and display its details.
-#
-# Step 1: Create three cat objects with different names and ages.
-# Step 2: Create a function that takes three cat objects,
-#         compares their ages and returns the oldest one.
-# Step 3: Print the oldest cat's details in the format:
-#         "The oldest cat is <name>, and is <age> years old."
-# ============================================================
+class Pets():
+    def __init__(self, animals):
+        self.animals = animals
 
-class Cat:
-    def __init__(self, cat_name, cat_age):
-        self.name = cat_name
-        self.age = cat_age
+    def walk(self):
+        for animal in self.animals:
+            print(animal.walk())
 
-# Step 1: Create cat objects
-cat1 = Cat("Whiskers", 3)
-cat2 = Cat("Luna", 7)
-cat3 = Cat("Milo", 5)
+class Cat():
+    is_lazy = True
 
-# Step 2: Find the oldest cat
-def find_oldest_cat(cat1, cat2, cat3):
-    """
-    Find and return the oldest cat among three cat objects.
-    Parameters: cat1, cat2, cat3 (Cat): cat objects with name and age
-    Returns: Cat: the oldest cat object
-    """
-    return max([cat1, cat2, cat3], key=lambda cat: cat.age)
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-# Step 3: Print the oldest cat's details
-oldest_cat = find_oldest_cat(cat1, cat2, cat3)
-print(f"The oldest cat is {oldest_cat.name}, and is {oldest_cat.age} years old.")
+    def walk(self):
+        return f'{self.name} is just walking around'
 
+class Bengal(Cat):
+    def sing(self, sounds):
+        return f'{sounds}'
 
+class Chartreux(Cat):
+    def sing(self, sounds):
+        return f'{sounds}'
 
+class Siamese(Cat):
+    def sing(self, sounds):
+        return f'{sounds}'
 
+bengal_cat = Bengal("Simba", 3)
+chartreux_cat = Chartreux("Luna", 5)
+siamese_cat = Siamese("Milo", 2)
+all_cats = [bengal_cat, chartreux_cat, siamese_cat]
+
+sara_pets = Pets(all_cats)
+sara_pets.walk()
